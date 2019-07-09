@@ -8,12 +8,18 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <com.hesc.customview.TextView
-        style="@style/TextviewStyle"
-        android:text="Hello World!"
-        app:text="jun"
-        app:textSize="16sp"
-        app:textColor="@color/colorAccent"
-        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.hesc.customview.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00ff00"
+            android:text="Hello World!"
+            app:ctext="jun"
+            app:ctextColor="@color/colorAccent"
+            app:ctextSize="16sp" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
