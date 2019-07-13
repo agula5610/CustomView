@@ -89,7 +89,7 @@ public class TextView extends View {
             Rect bounds = new Rect();
             // 获取文本的Rect
             myPaint.getTextBounds(mText, 0, mText.length(), bounds);
-            widthSize = bounds.width();
+            widthSize = bounds.width() + getPaddingLeft() + getPaddingRight();
         }
 
         if (heightMode == MeasureSpec.AT_MOST) {
@@ -97,7 +97,7 @@ public class TextView extends View {
             Rect bounds = new Rect();
             // 获取文本的Rect
             myPaint.getTextBounds(mText, 0, mText.length(), bounds);
-            heightSize = bounds.height();
+            heightSize = bounds.height() + getPaddingTop() + getPaddingBottom();
         }
         // 设置控件的宽高
         setMeasuredDimension(widthSize, heightSize);
@@ -109,7 +109,12 @@ public class TextView extends View {
         // 画文字  text  x    y   paint
         // x 就是开始的位置
         // y 基线  baseline
-        canvas.drawText(mText, 0, getHeight() / 2, myPaint);
+        // 计算方法  getHeight()/2 + (bottom - top)/2 -bottom;
+        // 其中top和bottom各自代表到基线的距离
+        Paint.FontMetricsInt fontMetricsInt = myPaint.getFontMetricsInt();
+        int baseLine = (getHeight() - fontMetricsInt.bottom - fontMetricsInt.top) / 2;
+        int x = getPaddingLeft();
+        canvas.drawText(mText, x, baseLine, myPaint);
 
     }
 
